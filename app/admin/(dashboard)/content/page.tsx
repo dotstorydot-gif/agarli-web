@@ -1161,7 +1161,7 @@ export default function ContentEditorPage() {
               <Field label="Phone Dial Link (tel:)" path={['contact', 'phoneHref']} placeholder="tel:+201000000000" />
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
-              <Field label="Email Address" path={['contact', 'email']} placeholder="hello@agarli.com" />
+              <Field label="Email Address" path={['contact', 'email']} placeholder="info@agarli.com" />
               <Field label="WhatsApp Direct Link" path={['contact', 'whatsapp']} placeholder="https://wa.me/..." />
             </div>
             <Field label="Location / Territory" path={['contact', 'location']} placeholder="Cairo · Egypt" />

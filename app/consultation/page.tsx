@@ -467,7 +467,7 @@ export default function ConsultationPage() {
         license="Licensed residential asset management · Egypt"
         phone="+20 102 013 0946"
         phoneHref="tel:+201020130946"
-        email="hello@agarli.com"
+        email="info@agarli.com"
         whatsapp="https://wa.me/201020130946"
         location="Cairo · Egypt"
         formsUrl="#consultation"
