@@ -50,100 +50,106 @@ export default function ComparisonTable({ headline, rows }: Props) {
               ))}
             </div>
 
-            {/* ── Mobile Comparison Cards (Visible ONLY on mobile, zero horizontal scrolling!) ── */}
-            <div className="comparison-cards-mobile" style={{ display: 'none', flexDirection: 'column', gap: '1rem' }}>
-              {rows.map(row => (
+            {/* ── Mobile Comparison Table (Visible ONLY on mobile: Unified, crystal-clear side-by-side layout) ── */}
+            <div
+              className="comparison-table-mobile"
+              style={{
+                display: 'none',
+                background: '#ffffff',
+                borderRadius: '1.25rem',
+                border: '1px solid rgba(11,26,48,0.12)',
+                boxShadow: '0 8px 30px rgba(11,26,48,0.06)',
+                overflow: 'hidden',
+              }}
+            >
+              {/* Header */}
+              <div
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: '0.85fr 1.15fr 1fr',
+                  background: '#0B1A30',
+                  color: '#ffffff',
+                  padding: '0.875rem 0.625rem',
+                  alignItems: 'center',
+                  gap: '0.5rem',
+                }}
+              >
+                <div style={{ fontSize: '0.6875rem', fontWeight: 700, color: '#94A3B8', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+                  Standard
+                </div>
+                <div
+                  style={{
+                    background: 'linear-gradient(135deg, #C9A96E 0%, #DFCA9E 100%)',
+                    color: '#0B1A30',
+                    fontWeight: 700,
+                    fontSize: '0.725rem',
+                    padding: '0.25rem 0.5rem',
+                    borderRadius: '9999px',
+                    textAlign: 'center',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '0.25rem',
+                    boxShadow: '0 2px 6px rgba(0,0,0,0.15)',
+                  }}
+                >
+                  <span>★ Agarli</span>
+                </div>
+                <div style={{ fontSize: '0.6875rem', fontWeight: 600, color: '#94A3B8', textAlign: 'center', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                  Traditional
+                </div>
+              </div>
+
+              {/* Rows */}
+              {rows.map((row, idx) => (
                 <div
                   key={row.label}
                   style={{
-                    background: '#ffffff',
-                    borderRadius: '1.25rem',
-                    padding: '1.25rem',
-                    border: '1px solid rgba(11,26,48,0.08)',
-                    boxShadow: '0 2px 10px rgba(11,26,48,0.03)',
+                    display: 'grid',
+                    gridTemplateColumns: '0.85fr 1.15fr 1fr',
+                    gap: '0.5rem',
+                    padding: '0.875rem 0.625rem',
+                    alignItems: 'center',
+                    background: idx % 2 === 1 ? 'rgba(247,245,242,0.45)' : '#ffffff',
+                    borderBottom: idx === rows.length - 1 ? 'none' : '1px solid rgba(11,26,48,0.06)',
                   }}
                 >
+                  {/* Standard / Feature Label */}
+                  <div style={{ fontSize: '0.75rem', fontWeight: 700, color: '#0B1A30', lineHeight: 1.25 }}>
+                    {row.label}
+                  </div>
+
+                  {/* Agarli Column (Highlighted) */}
                   <div
                     style={{
-                      fontSize: '0.95rem',
-                      fontWeight: 700,
-                      color: '#1B2D45',
-                      marginBottom: '0.875rem',
-                      paddingBottom: '0.5rem',
-                      borderBottom: '1px solid rgba(11,26,48,0.06)',
                       display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
+                      alignItems: 'flex-start',
+                      gap: '0.35rem',
+                      background: 'rgba(201,169,110,0.08)',
+                      border: '1px solid rgba(201,169,110,0.25)',
+                      borderRadius: '0.5rem',
+                      padding: '0.5rem 0.45rem',
                     }}
                   >
-                    <span>{row.label}</span>
-                    <span style={{ fontSize: '0.65rem', letterSpacing: '0.12em', color: '#6B7280', textTransform: 'uppercase' }}>
-                      Comparison
+                    <Check style={{ height: '0.85rem', width: '0.85rem', flexShrink: 0, color: '#16A34A', marginTop: '1px' }} />
+                    <span style={{ fontSize: '0.725rem', fontWeight: 600, color: '#0B1A30', lineHeight: 1.3 }}>
+                      {row.agarli}
                     </span>
                   </div>
 
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
-                    {/* Agarli Pill */}
-                    <div
-                      style={{
-                        background: 'rgba(201,169,110,0.08)',
-                        border: '1px solid rgba(201,169,110,0.3)',
-                        borderRadius: '0.875rem',
-                        padding: '0.875rem 0.75rem',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        justifyContent: 'space-between',
-                      }}
-                    >
-                      <div
-                        style={{
-                          display: 'flex',
-                          alignItems: 'center',
-                          gap: '0.35rem',
-                          color: '#0B1A30',
-                          fontWeight: 700,
-                          fontSize: '0.75rem',
-                          marginBottom: '0.35rem',
-                        }}
-                      >
-                        <Check style={{ width: '0.85rem', height: '0.85rem', color: '#2DBD7A', flexShrink: 0 }} />
-                        <span>Agarli</span>
-                      </div>
-                      <div style={{ fontSize: '0.8rem', color: '#1B2D45', lineHeight: 1.45, fontWeight: 500 }}>
-                        {row.agarli}
-                      </div>
-                    </div>
-
-                    {/* Traditional Pill */}
-                    <div
-                      style={{
-                        background: 'rgba(247,245,242,0.7)',
-                        border: '1px solid rgba(11,26,48,0.06)',
-                        borderRadius: '0.875rem',
-                        padding: '0.875rem 0.75rem',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        justifyContent: 'space-between',
-                      }}
-                    >
-                      <div
-                        style={{
-                          display: 'flex',
-                          alignItems: 'center',
-                          gap: '0.35rem',
-                          color: '#6B7280',
-                          fontWeight: 600,
-                          fontSize: '0.75rem',
-                          marginBottom: '0.35rem',
-                        }}
-                      >
-                        <Minus style={{ width: '0.85rem', height: '0.85rem', color: '#9CA3AF', flexShrink: 0 }} />
-                        <span>Traditional</span>
-                      </div>
-                      <div style={{ fontSize: '0.8rem', color: '#6B7280', lineHeight: 1.45 }}>
-                        {row.traditional}
-                      </div>
-                    </div>
+                  {/* Traditional Column (Muted) */}
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignItems: 'flex-start',
+                      gap: '0.35rem',
+                      padding: '0.5rem 0.25rem',
+                    }}
+                  >
+                    <Minus style={{ height: '0.85rem', width: '0.85rem', flexShrink: 0, color: '#94A3B8', marginTop: '1px' }} />
+                    <span style={{ fontSize: '0.725rem', color: '#64748B', lineHeight: 1.3 }}>
+                      {row.traditional}
+                    </span>
                   </div>
                 </div>
               ))}
@@ -157,15 +163,15 @@ export default function ComparisonTable({ headline, rows }: Props) {
             .comparison-table-desktop {
               display: none !important;
             }
-            .comparison-cards-mobile {
-              display: flex !important;
+            .comparison-table-mobile {
+              display: block !important;
             }
           }
           @media (min-width: 769px) {
             .comparison-table-desktop {
               display: block !important;
             }
-            .comparison-cards-mobile {
+            .comparison-table-mobile {
               display: none !important;
             }
           }

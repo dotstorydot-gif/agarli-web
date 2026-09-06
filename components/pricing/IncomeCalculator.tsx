@@ -136,14 +136,30 @@ export default function IncomeCalculator({ config }: Props) {
             >
               {/* SLIDER 1: Monthly Rent */}
               <div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '0.75rem' }}>
-                  <label style={{ fontSize: '0.8125rem', fontWeight: 700, color: '#1B2D45', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
-                    1. Initial Monthly Rent
-                  </label>
-                  <span style={{ fontSize: '1.625rem', fontWeight: 700, color: '#1B2D45', letterSpacing: '-0.02em' }}>
-                    {formatCurrency(monthlyRent)}
-                    <span style={{ fontSize: '0.85rem', fontWeight: 500, color: '#6B7280' }}> / mo</span>
-                  </span>
+                <div
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'flex-end',
+                    flexWrap: 'wrap',
+                    gap: '0.5rem',
+                    marginBottom: '0.875rem',
+                  }}
+                >
+                  <div>
+                    <div style={{ fontSize: '0.6875rem', fontWeight: 700, color: '#C9A96E', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+                      Step 1
+                    </div>
+                    <label style={{ fontSize: '0.925rem', fontWeight: 700, color: '#0B1A30' }}>
+                      Initial Monthly Rent
+                    </label>
+                  </div>
+                  <div style={{ textAlign: 'right', whiteSpace: 'nowrap' }}>
+                    <span style={{ fontSize: 'clamp(1.25rem, 4.5vw, 1.625rem)', fontWeight: 800, color: '#0B1A30', letterSpacing: '-0.02em', whiteSpace: 'nowrap' }}>
+                      {formatCurrency(monthlyRent)}
+                    </span>
+                    <span style={{ fontSize: '0.8125rem', fontWeight: 600, color: '#64748B', whiteSpace: 'nowrap' }}> / mo</span>
+                  </div>
                 </div>
 
                 {/* Range Slider */}
@@ -165,49 +181,105 @@ export default function IncomeCalculator({ config }: Props) {
                   }}
                 />
 
-                <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '0.5rem', fontSize: '0.75rem', color: '#9CA3AF' }}>
-                  <span>2k EGP</span>
-                  <span>50k EGP</span>
-                  <span>100k EGP</span>
-                  <span>175k EGP</span>
+                <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '0.5rem', fontSize: '0.725rem', color: '#94A3B8' }}>
+                  <span>2k</span>
+                  <span>50k</span>
+                  <span>100k</span>
+                  <span>175k</span>
                   <span>250k EGP</span>
                 </div>
 
-                {/* Quick Preset Buttons */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginTop: '1.25rem', flexWrap: 'wrap' }}>
-                  <span style={{ fontSize: '0.75rem', color: '#6B7280', fontWeight: 600 }}>Quick Presets:</span>
-                  {PRESETS.map(preset => (
-                    <button
-                      key={preset}
-                      type="button"
-                      onClick={() => setMonthlyRent(preset)}
-                      style={{
-                        padding: '0.3rem 0.7rem',
-                        borderRadius: '9999px',
-                        fontSize: '0.75rem',
-                        fontWeight: 600,
-                        border: monthlyRent === preset ? '1px solid #1B2D45' : '1px solid #E5E7EB',
-                        background: monthlyRent === preset ? '#1B2D45' : '#F9FAFB',
-                        color: monthlyRent === preset ? '#ffffff' : '#4B5563',
-                        cursor: 'pointer',
-                        transition: 'all 0.2s ease',
-                      }}
-                    >
-                      {preset >= 1000 ? `${preset / 1000}k` : preset}
-                    </button>
-                  ))}
+                {/* Redesigned Luxury Segmented Quick Presets */}
+                <div style={{ marginTop: '1.25rem' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.45rem' }}>
+                    <span style={{ fontSize: '0.7rem', color: '#64748B', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+                      Popular Rent Tiers
+                    </span>
+                    <span style={{ fontSize: '0.7rem', color: '#C9A96E', fontWeight: 600 }}>
+                      Quick select
+                    </span>
+                  </div>
+
+                  <div
+                    style={{
+                      display: 'grid',
+                      gridTemplateColumns: 'repeat(5, 1fr)',
+                      gap: '0.35rem',
+                      background: '#F1F5F9',
+                      padding: '0.25rem',
+                      borderRadius: '0.75rem',
+                      border: '1px solid rgba(11,26,48,0.06)',
+                    }}
+                  >
+                    {PRESETS.map(preset => {
+                      const isSelected = monthlyRent === preset;
+                      return (
+                        <button
+                          key={preset}
+                          type="button"
+                          onClick={() => setMonthlyRent(preset)}
+                          style={{
+                            padding: '0.5rem 0.15rem',
+                            borderRadius: '0.5rem',
+                            fontSize: '0.75rem',
+                            fontWeight: isSelected ? 700 : 600,
+                            border: isSelected ? '1px solid #0B1A30' : '1px solid transparent',
+                            background: isSelected ? '#0B1A30' : '#FFFFFF',
+                            color: isSelected ? '#ffffff' : '#334155',
+                            boxShadow: isSelected ? '0 2px 6px rgba(11,26,48,0.2)' : '0 1px 2px rgba(0,0,0,0.04)',
+                            cursor: 'pointer',
+                            transition: 'all 0.15s ease',
+                            textAlign: 'center',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            lineHeight: 1.15,
+                          }}
+                        >
+                          <span>{preset >= 1000 ? `${preset / 1000}k` : preset}</span>
+                          <span
+                            style={{
+                              fontSize: '0.575rem',
+                              color: isSelected ? '#C9A96E' : '#94A3B8',
+                              fontWeight: 500,
+                              marginTop: '0.1rem',
+                            }}
+                          >
+                            EGP
+                          </span>
+                        </button>
+                      );
+                    })}
+                  </div>
                 </div>
               </div>
 
               {/* SLIDER 2: Investment Horizon (Years) */}
               <div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '0.75rem' }}>
-                  <label style={{ fontSize: '0.8125rem', fontWeight: 700, color: '#1B2D45', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
-                    2. Projection Horizon
-                  </label>
-                  <span style={{ fontSize: '1.625rem', fontWeight: 700, color: '#1B2D45', letterSpacing: '-0.02em' }}>
-                    {years} {years === 1 ? 'Year' : 'Years'}
-                  </span>
+                <div
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'flex-end',
+                    flexWrap: 'wrap',
+                    gap: '0.5rem',
+                    marginBottom: '0.875rem',
+                  }}
+                >
+                  <div>
+                    <div style={{ fontSize: '0.6875rem', fontWeight: 700, color: '#C9A96E', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+                      Step 2
+                    </div>
+                    <label style={{ fontSize: '0.925rem', fontWeight: 700, color: '#0B1A30' }}>
+                      Projection Horizon
+                    </label>
+                  </div>
+                  <div style={{ textAlign: 'right', whiteSpace: 'nowrap' }}>
+                    <span style={{ fontSize: 'clamp(1.25rem, 4.5vw, 1.625rem)', fontWeight: 800, color: '#0B1A30', letterSpacing: '-0.02em', whiteSpace: 'nowrap' }}>
+                      {years} {years === 1 ? 'Year' : 'Years'}
+                    </span>
+                  </div>
                 </div>
 
                 {/* Range Slider for Years */}
@@ -229,13 +301,13 @@ export default function IncomeCalculator({ config }: Props) {
                   }}
                 />
 
-                <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '0.5rem', fontSize: '0.75rem', color: '#9CA3AF' }}>
-                  <span>1 Year</span>
-                  <span>2 Years</span>
-                  <span>3 Years</span>
-                  <span>4 Years</span>
-                  <span>5 Years</span>
-                  <span>6 Years</span>
+                <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '0.5rem', fontSize: '0.725rem', color: '#94A3B8' }}>
+                  <span>1Y</span>
+                  <span>2Y</span>
+                  <span>3Y</span>
+                  <span>4Y</span>
+                  <span>5Y</span>
+                  <span>6Y</span>
                   <span>7 Years</span>
                 </div>
 
@@ -342,7 +414,7 @@ export default function IncomeCalculator({ config }: Props) {
                 </span>
               </div>
 
-              {/* Mobile Breakdown (Clean organized stacked pills, no loose dots) */}
+              {/* Mobile Breakdown (Clean organized stacked pills, no loose dots, zero wrapping) */}
               <div
                 className="calculator-metrics-mobile"
                 style={{
@@ -356,54 +428,58 @@ export default function IncomeCalculator({ config }: Props) {
                 <div
                   style={{
                     background: 'rgba(255,255,255,0.06)',
-                    border: '1px solid rgba(255,255,255,0.1)',
+                    border: '1px solid rgba(255,255,255,0.12)',
                     borderRadius: '0.75rem',
                     padding: '0.625rem 0.875rem',
                     display: 'flex',
                     justifyContent: 'space-between',
                     alignItems: 'center',
-                    fontSize: '0.825rem',
-                    color: 'rgba(255,255,255,0.75)',
+                    gap: '0.5rem',
+                    fontSize: '0.8rem',
+                    color: 'rgba(255,255,255,0.8)',
                   }}
                 >
-                  <span>Average Net Payout:</span>
-                  <strong style={{ color: '#C9A96E', fontSize: '0.875rem' }}>
-                    {formatCurrency(totalNetOwner / (years * 12))} / mo
-                  </strong>
+                  <span style={{ whiteSpace: 'nowrap' }}>Average Net Payout:</span>
+                  <span style={{ color: '#C9A96E', fontWeight: 700, fontSize: '0.85rem', whiteSpace: 'nowrap', flexShrink: 0 }}>
+                    {formatCurrency(totalNetOwner / (years * 12))}
+                    <span style={{ fontSize: '0.75rem', fontWeight: 500, opacity: 0.85 }}> / mo</span>
+                  </span>
                 </div>
 
                 <div
                   style={{
                     background: 'rgba(255,255,255,0.06)',
-                    border: '1px solid rgba(255,255,255,0.1)',
+                    border: '1px solid rgba(255,255,255,0.12)',
                     borderRadius: '0.75rem',
                     padding: '0.625rem 0.875rem',
                     display: 'flex',
                     justifyContent: 'space-between',
                     alignItems: 'center',
-                    fontSize: '0.825rem',
-                    color: 'rgba(255,255,255,0.75)',
+                    gap: '0.5rem',
+                    fontSize: '0.8rem',
+                    color: 'rgba(255,255,255,0.8)',
                   }}
                 >
-                  <span>Initial Rent:</span>
-                  <strong style={{ color: '#ffffff', fontSize: '0.875rem' }}>
-                    {formatCurrency(monthlyRent)} / mo
-                  </strong>
+                  <span style={{ whiteSpace: 'nowrap' }}>Initial Rent:</span>
+                  <span style={{ color: '#ffffff', fontWeight: 700, fontSize: '0.85rem', whiteSpace: 'nowrap', flexShrink: 0 }}>
+                    {formatCurrency(monthlyRent)}
+                    <span style={{ fontSize: '0.75rem', fontWeight: 500, opacity: 0.85 }}> / mo</span>
+                  </span>
                 </div>
 
                 <div
                   style={{
-                    background: 'rgba(201,169,110,0.1)',
-                    border: '1px solid rgba(201,169,110,0.25)',
+                    background: 'rgba(201,169,110,0.12)',
+                    border: '1px solid rgba(201,169,110,0.3)',
                     borderRadius: '0.75rem',
                     padding: '0.625rem 0.875rem',
-                    fontSize: '0.775rem',
-                    color: '#C9A96E',
+                    fontSize: '0.75rem',
+                    color: '#DFCA9E',
                     textAlign: 'center',
                     lineHeight: 1.4,
                   }}
                 >
-                  Agarli Advantage: <strong>15% Y1 · 5% Y2+ · +10% rent appreciation/yr</strong>
+                  Agarli Advantage: <strong style={{ color: '#ffffff' }}>15% Y1 · 5% Y2+ · +10% rent appreciation/yr</strong>
                 </div>
               </div>
 
@@ -451,6 +527,30 @@ export default function IncomeCalculator({ config }: Props) {
                 .calculator-metrics-mobile {
                   display: none !important;
                 }
+              }
+              input[type=range] {
+                -webkit-appearance: none;
+                appearance: none;
+              }
+              input[type=range]::-webkit-slider-thumb {
+                -webkit-appearance: none;
+                height: 20px;
+                width: 20px;
+                border-radius: 50%;
+                background: #ffffff;
+                border: 2px solid #0B1A30;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+                cursor: pointer;
+                margin-top: -6px;
+              }
+              input[type=range]::-moz-range-thumb {
+                height: 20px;
+                width: 20px;
+                border-radius: 50%;
+                background: #ffffff;
+                border: 2px solid #0B1A30;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+                cursor: pointer;
               }
             `}</style>
           </div>
