@@ -4,6 +4,7 @@ import './globals.css';
 import { getContent } from '@/lib/content';
 import FloatingWhatsApp from '@/components/shared/FloatingWhatsApp';
 import { ConsultationProvider } from '@/components/shared/ConsultationContext';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
@@ -61,6 +62,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </Script>
           </>
         )}
+        <SpeedInsights />
       </body>
     </html>
   );
