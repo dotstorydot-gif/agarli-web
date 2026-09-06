@@ -68,14 +68,14 @@ export default function AnalyticsDashboard({ gaId }: Props) {
           </div>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem', marginBottom: '1.5rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 160px), 1fr))', gap: '1rem', marginBottom: '1.5rem' }}>
           <MetricCard icon={Users} label="Sessions" value={mockData.sessions.toLocaleString()} sub="Last 30 days" color="#C9A96E" />
           <MetricCard icon={Eye} label="Page Views" value={mockData.pageViews.toLocaleString()} sub="Last 30 days" color="#1B2D45" />
           <MetricCard icon={TrendingUp} label="Avg. Duration" value={mockData.avgDuration} sub="Per session" color="#2DBD7A" />
           <MetricCard icon={Globe} label="Bounce Rate" value={mockData.bounceRate} sub="All pages" color="#8B5CF6" />
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '1.5rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: '1.5rem' }}>
           {/* Top Pages */}
           <Card>
             <h3 style={{ fontSize: '0.9rem', fontWeight: 600, color: '#1B2D45', marginBottom: '1.25rem' }}>Top Pages</h3>

@@ -32,8 +32,8 @@ export default function FloatingWhatsApp({
     <div
       style={{
         position: 'fixed',
-        bottom: '2rem',
-        right: '2rem',
+        bottom: 'clamp(1rem, 4vw, 2rem)',
+        right: 'clamp(1rem, 4vw, 2rem)',
         zIndex: 99,
         display: 'flex',
         alignItems: 'center',

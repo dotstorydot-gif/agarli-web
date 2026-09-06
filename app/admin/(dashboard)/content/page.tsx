@@ -155,13 +155,13 @@ function ImageField({
           </div>
         </div>
       )}
-      <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', alignItems: 'center' }}>
         <input
           type="text"
           value={val}
           onChange={e => update(path, e.target.value)}
           placeholder="Image path (e.g. /images/hero-villa.jpg or https://...)"
-          style={{ flex: 1, padding: '0.55rem 0.75rem', border: '1.5px solid #E5E7EB', borderRadius: '0.5rem', fontSize: '0.85rem', fontFamily: 'inherit', color: '#1B2D45', background: '#fff' }}
+          style={{ flex: '1 1 200px', minWidth: '160px', padding: '0.55rem 0.75rem', border: '1.5px solid #E5E7EB', borderRadius: '0.5rem', fontSize: '0.85rem', fontFamily: 'inherit', color: '#1B2D45', background: '#fff' }}
         />
         <label style={{ display: 'inline-flex', alignItems: 'center', gap: '0.375rem', padding: '0.55rem 1rem', background: isUp ? '#9CA3AF' : '#1B2D45', color: '#fff', borderRadius: '0.5rem', fontSize: '0.8rem', fontWeight: 600, cursor: isUp ? 'not-allowed' : 'pointer', whiteSpace: 'nowrap', transition: 'background 0.2s' }}>
           <Upload style={{ width: '0.875rem', height: '0.875rem' }} />
@@ -176,7 +176,7 @@ function ImageField({
 // ─── Section ─────────────────────────────────────────────────────────────────
 function Section({ title, description, children }: { title: string; description?: string; children: React.ReactNode }) {
   return (
-    <div style={{ background: '#fff', borderRadius: '1.25rem', padding: '2rem', marginBottom: '1.75rem', border: '1px solid #E5E7EB', boxShadow: '0 2px 8px rgba(0,0,0,0.02)' }}>
+    <div style={{ background: '#fff', borderRadius: '1.25rem', padding: 'clamp(1.25rem, 3.5vw, 2rem)', marginBottom: '1.75rem', border: '1px solid #E5E7EB', boxShadow: '0 2px 8px rgba(0,0,0,0.02)' }}>
       <div style={{ marginBottom: '1.5rem', paddingBottom: '0.875rem', borderBottom: '1px solid #F3F4F6' }}>
         <h2 style={{ fontSize: '1.125rem', fontWeight: 600, color: '#1B2D45', margin: 0 }}>{title}</h2>
         {description && <p style={{ color: '#6B7280', fontSize: '0.825rem', marginTop: '0.25rem', margin: 0 }}>{description}</p>}
@@ -301,7 +301,7 @@ export default function ContentEditorPage() {
 
   return (
     <EditorContext.Provider value={{ content, update, uploading, handleFileUpload }}>
-    <div style={{ padding: '2.5rem', maxWidth: '1000px', margin: '0 auto' }}>
+    <div style={{ padding: 'clamp(1rem, 3.5vw, 2.5rem)', maxWidth: '1000px', margin: '0 auto' }}>
       {/* Sticky Header with Page switcher & Save Button */}
       <div
         style={{

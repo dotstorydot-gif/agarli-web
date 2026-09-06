@@ -88,7 +88,7 @@ export default function AdminLeadsPage() {
   const countScheduled = leads.filter(l => l.status === 'meeting_scheduled').length;
 
   return (
-    <div style={{ padding: '2.5rem' }}>
+    <div style={{ padding: 'clamp(1.25rem, 3.5vw, 2.5rem)' }}>
       {/* Top Header */}
       <div
         style={{

@@ -30,9 +30,10 @@ export default function AdminLoginPage() {
     <div style={{
       minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center',
       background: 'linear-gradient(135deg, #0B1A30 0%, #1B2D45 100%)',
+      padding: '1.25rem',
     }}>
       <div style={{
-        background: '#fff', borderRadius: '1.5rem', padding: '3rem',
+        background: '#fff', borderRadius: '1.5rem', padding: 'clamp(1.75rem, 5vw, 3rem)',
         width: '100%', maxWidth: '420px', boxShadow: '0 40px 80px -20px rgba(0,0,0,0.4)',
       }}>
         <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>

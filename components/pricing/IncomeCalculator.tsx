@@ -129,8 +129,8 @@ export default function IncomeCalculator({ config }: Props) {
             <div
               style={{
                 display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-                gap: '3rem',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
+                gap: 'clamp(1.75rem, 4vw, 3rem)',
                 alignItems: 'start',
               }}
             >

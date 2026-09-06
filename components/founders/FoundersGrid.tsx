@@ -34,7 +34,7 @@ export default function FoundersGrid({ founders }: Props) {
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))',
             gap: '2.5rem',
             alignItems: 'stretch',
           }}
@@ -69,7 +69,7 @@ export default function FoundersGrid({ founders }: Props) {
                 <div
                   style={{
                     position: 'relative',
-                    padding: '2.25rem 2.25rem 1.5rem',
+                    padding: 'clamp(1.5rem, 4vw, 2.25rem) clamp(1.25rem, 4vw, 2.25rem) 1.5rem',
                     background: 'linear-gradient(180deg, #FAF8F5 0%, #FFFFFF 100%)',
                     borderBottom: '1px solid rgba(11,26,48,0.05)',
                   }}
@@ -180,7 +180,7 @@ export default function FoundersGrid({ founders }: Props) {
                 {/* Bio Body */}
                 <div
                   style={{
-                    padding: '2rem 2.25rem',
+                    padding: '1.75rem clamp(1.25rem, 4vw, 2.25rem)',
                     flexGrow: 1,
                     display: 'flex',
                     flexDirection: 'column',
