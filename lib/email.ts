@@ -125,7 +125,7 @@ export async function sendLeadNotificationEmail(lead: LeadNotificationData) {
   try {
     if (resendApiKey) {
       const resend = new Resend(resendApiKey);
-      const fromAddress = process.env.RESEND_FROM_EMAIL || 'Agarli Leads <onboarding@resend.dev>';
+      const fromAddress = process.env.RESEND_FROM_EMAIL || 'Agarli Leads <leads@agarli.com>';
       
       const res = await resend.emails.send({
         from: fromAddress,
