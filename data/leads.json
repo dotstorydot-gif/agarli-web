@@ -1,5 +1,27 @@
 [
   {
+    "id": "lead_1788721856809_zpenw",
+    "createdAt": "2026-09-06T19:10:56.809Z",
+    "status": "new",
+    "name": "Sameh Kamel",
+    "phone": "01006119667",
+    "email": "kamelsameh1@gmail.com",
+    "propertyLocation": "New Cairo (Tagamoa)",
+    "propertyType": "Standalone Villa",
+    "notes": "Testing lead submission"
+  },
+  {
+    "id": "lead_1788721240234_9ozi0",
+    "createdAt": "2026-09-06T19:00:40.234Z",
+    "status": "new",
+    "name": "sameh kamel",
+    "phone": "01006119667",
+    "email": "kamelsameh1@gmail.com",
+    "propertyLocation": "New Cairo (Tagamoa)",
+    "propertyType": "Penthouse / Duplex",
+    "notes": "sadasf"
+  },
+  {
     "id": "lead_1788692028918_1skrx",
     "createdAt": "2026-09-06T10:53:48.918Z",
     "status": "new",

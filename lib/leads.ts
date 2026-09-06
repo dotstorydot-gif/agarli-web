@@ -13,26 +13,72 @@ export interface Lead {
   notes?: string;
 }
 
-const LEADS_PATH = path.join(process.cwd(), 'data', 'leads.json');
+const SEED_LEADS_PATH = path.join(process.cwd(), 'data', 'leads.json');
+const TMP_LEADS_PATH = path.join('/tmp', 'leads.json');
 
-function ensureLeadsFile(): void {
-  if (!fs.existsSync(LEADS_PATH)) {
-    fs.writeFileSync(LEADS_PATH, JSON.stringify([], null, 2), 'utf-8');
+// In-memory cache for serverless invocation lifetime
+let memoryLeads: Lead[] | null = null;
+
+function getStoragePath(): string {
+  try {
+    // If the data directory is writable (e.g. local dev), write to data/leads.json
+    fs.accessSync(path.dirname(SEED_LEADS_PATH), fs.constants.W_OK);
+    return SEED_LEADS_PATH;
+  } catch {
+    // Vercel serverless filesystem is read-only outside of /tmp
+    return TMP_LEADS_PATH;
   }
 }
 
 export function getLeads(): Lead[] {
-  ensureLeadsFile();
+  if (memoryLeads) return memoryLeads;
+
+  let leads: Lead[] = [];
+
+  // 1. Read seed file from project if it exists
   try {
-    const raw = fs.readFileSync(LEADS_PATH, 'utf-8');
-    return JSON.parse(raw);
-  } catch {
-    return [];
+    if (fs.existsSync(SEED_LEADS_PATH)) {
+      const raw = fs.readFileSync(SEED_LEADS_PATH, 'utf-8');
+      leads = JSON.parse(raw);
+    }
+  } catch (e) {
+    console.warn('[Leads] Error reading seed leads:', e);
   }
+
+  // 2. Merge with any leads stored in /tmp during serverless run
+  try {
+    if (fs.existsSync(TMP_LEADS_PATH)) {
+      const tmpRaw = fs.readFileSync(TMP_LEADS_PATH, 'utf-8');
+      const tmpLeads: Lead[] = JSON.parse(tmpRaw);
+      const existingIds = new Set(leads.map(l => l.id));
+      for (const item of tmpLeads) {
+        if (!existingIds.has(item.id)) {
+          leads.unshift(item);
+        }
+      }
+    }
+  } catch (e) {
+    console.warn('[Leads] Error reading tmp leads:', e);
+  }
+
+  memoryLeads = leads;
+  return leads;
 }
 
 export function saveLeads(leads: Lead[]): void {
-  fs.writeFileSync(LEADS_PATH, JSON.stringify(leads, null, 2), 'utf-8');
+  memoryLeads = leads;
+  const targetPath = getStoragePath();
+
+  try {
+    fs.writeFileSync(targetPath, JSON.stringify(leads, null, 2), 'utf-8');
+  } catch (err) {
+    // Fallback attempt to write into /tmp
+    try {
+      fs.writeFileSync(TMP_LEADS_PATH, JSON.stringify(leads, null, 2), 'utf-8');
+    } catch (tmpErr) {
+      console.warn('[Leads Storage Notice] Could not write to disk, preserved in serverless memory cache:', tmpErr);
+    }
+  }
 }
 
 export function addLead(data: Omit<Lead, 'id' | 'createdAt' | 'status'> & { notes?: string }): Lead {

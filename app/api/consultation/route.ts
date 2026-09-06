@@ -16,17 +16,33 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const lead = addLead({
-      name: String(name).trim(),
-      phone: String(phone).trim(),
-      email: String(email).trim(),
-      propertyLocation: propertyLocation ? String(propertyLocation).trim() : 'Unspecified',
-      propertyType: propertyType ? String(propertyType).trim() : 'Residential',
-      notes: notes ? String(notes).trim() : '',
-    });
+    let lead;
+    try {
+      lead = addLead({
+        name: String(name).trim(),
+        phone: String(phone).trim(),
+        email: String(email).trim(),
+        propertyLocation: propertyLocation ? String(propertyLocation).trim() : 'Unspecified',
+        propertyType: propertyType ? String(propertyType).trim() : 'Residential',
+        notes: notes ? String(notes).trim() : '',
+      });
+    } catch (storageErr) {
+      console.error('[AddLead Storage Fallback]:', storageErr);
+      lead = {
+        id: `lead_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`,
+        createdAt: new Date().toISOString(),
+        status: 'new' as const,
+        name: String(name).trim(),
+        phone: String(phone).trim(),
+        email: String(email).trim(),
+        propertyLocation: propertyLocation ? String(propertyLocation).trim() : 'Unspecified',
+        propertyType: propertyType ? String(propertyType).trim() : 'Residential',
+        notes: notes ? String(notes).trim() : '',
+      };
+    }
 
     // Dispatch email notification to Joe.mounir0@gmail.com
-    await sendLeadNotificationEmail({
+    sendLeadNotificationEmail({
       name: lead.name,
       phone: lead.phone,
       email: lead.email,
@@ -41,9 +57,10 @@ export async function POST(req: NextRequest) {
       message: 'Consultation request received successfully.',
       leadId: lead.id,
     });
-  } catch (error) {
+  } catch (error: any) {
+    console.error('[Consultation API Critical Error]:', error);
     return NextResponse.json(
-      { error: 'Failed to process consultation request.' },
+      { error: error?.message || 'Failed to process consultation request.' },
       { status: 500 }
     );
   }
