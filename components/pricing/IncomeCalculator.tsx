@@ -410,7 +410,7 @@ export default function IncomeCalculator({ config }: Props) {
                 </span>
                 <span style={{ opacity: 0.35 }}>•</span>
                 <span>
-                  Rule: <strong>15% Y1 · 5% Y2+ · +10% rent appreciation/yr</strong>
+                  Formula: <strong style={{ color: '#ffffff' }}>[15% Year 1] → [5% Year 2+] + [10% Annual Rent Appreciation]</strong>
                 </span>
               </div>
 
@@ -467,19 +467,32 @@ export default function IncomeCalculator({ config }: Props) {
                   </span>
                 </div>
 
+                {/* Clear bracketed formula tags - zero decimal confusion */}
                 <div
                   style={{
-                    background: 'rgba(201,169,110,0.12)',
-                    border: '1px solid rgba(201,169,110,0.3)',
+                    background: 'rgba(201,169,110,0.1)',
+                    border: '1px solid rgba(201,169,110,0.25)',
                     borderRadius: '0.75rem',
-                    padding: '0.625rem 0.875rem',
-                    fontSize: '0.75rem',
-                    color: '#DFCA9E',
+                    padding: '0.7rem 0.75rem',
                     textAlign: 'center',
-                    lineHeight: 1.4,
                   }}
                 >
-                  Agarli Advantage: <strong style={{ color: '#ffffff' }}>15% Y1 · 5% Y2+ · +10% rent appreciation/yr</strong>
+                  <div style={{ fontSize: '0.6875rem', fontWeight: 700, color: '#C9A96E', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '0.4rem' }}>
+                    Agarli Advantage Formula
+                  </div>
+                  <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '0.35rem', flexWrap: 'wrap', fontSize: '0.75rem', fontWeight: 700 }}>
+                    <span style={{ background: 'rgba(255,255,255,0.1)', color: '#ffffff', padding: '0.2rem 0.45rem', borderRadius: '0.375rem', border: '1px solid rgba(255,255,255,0.15)' }}>
+                      [15% Year 1]
+                    </span>
+                    <span style={{ color: '#C9A96E', fontSize: '0.8rem' }}>→</span>
+                    <span style={{ background: 'rgba(255,255,255,0.1)', color: '#ffffff', padding: '0.2rem 0.45rem', borderRadius: '0.375rem', border: '1px solid rgba(255,255,255,0.15)' }}>
+                      [5% Year 2+]
+                    </span>
+                    <span style={{ color: '#C9A96E', fontSize: '0.8rem' }}>+</span>
+                    <span style={{ background: 'rgba(201,169,110,0.2)', color: '#DFCA9E', padding: '0.2rem 0.45rem', borderRadius: '0.375rem', border: '1px solid rgba(201,169,110,0.35)' }}>
+                      [+10% Appreciation/yr]
+                    </span>
+                  </div>
                 </div>
               </div>
 
