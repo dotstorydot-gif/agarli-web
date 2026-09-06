@@ -4,6 +4,7 @@ import './globals.css';
 import { getContent } from '@/lib/content';
 import FloatingWhatsApp from '@/components/shared/FloatingWhatsApp';
 import { ConsultationProvider } from '@/components/shared/ConsultationContext';
+import { Analytics } from '@vercel/analytics/next';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
@@ -50,6 +51,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {children}
           <FloatingWhatsApp whatsappUrl={whatsappUrl} label={whatsappLabel} />
         </ConsultationProvider>
+        <Analytics />
         {gaId && (
           <>
             <Script
