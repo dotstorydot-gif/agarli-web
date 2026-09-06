@@ -125,15 +125,34 @@ export async function sendLeadNotificationEmail(lead: LeadNotificationData) {
   try {
     if (resendApiKey) {
       const resend = new Resend(resendApiKey);
-      const data = await resend.emails.send({
-        from: 'Agarli Leads <onboarding@resend.dev>',
+      const fromAddress = process.env.RESEND_FROM_EMAIL || 'Agarli Leads <onboarding@resend.dev>';
+      
+      const res = await resend.emails.send({
+        from: fromAddress,
         to: [recipient],
         replyTo: lead.email,
         subject: `[New Lead] ${lead.name} - ${lead.propertyLocation} (${lead.propertyType})`,
         html: htmlContent,
       });
-      console.log('[Email Dispatched via Resend]:', data);
-      return { ok: true, data };
+
+      // If Resend blocked recipient due to sandbox restriction, fallback to account owner email
+      if (res.error && res.error.message?.includes('only send testing emails to your own email address')) {
+        console.warn(`[Resend Sandbox Notice] Recipient ${recipient} is blocked in sandbox mode. Falling back to sameh@dot-story.com...`);
+        const fallbackRes = await resend.emails.send({
+          from: 'Agarli Leads <onboarding@resend.dev>',
+          to: ['sameh@dot-story.com'],
+          replyTo: lead.email,
+          subject: `[New Lead - Please Forward to Joe] ${lead.name} - ${lead.propertyLocation}`,
+          html: `<div style="background:#FFFBEB;border:1px solid #FCD34D;padding:12px 16px;border-radius:8px;margin-bottom:16px;font-family:sans-serif;font-size:13px;color:#92400E;">
+            <strong>Sandbox Notice:</strong> This lead was intended for <strong>${recipient}</strong>. To send directly to Joe without forwarding, please verify <strong>agarli.com</strong> at <a href="https://resend.com/domains">resend.com/domains</a>.
+          </div>` + htmlContent,
+        });
+        console.log('[Email Dispatched via Resend Fallback to sameh@dot-story.com]:', fallbackRes);
+        return { ok: true, data: fallbackRes.data, fallback: true };
+      }
+
+      console.log('[Email Dispatched via Resend]:', res);
+      return { ok: !res.error, data: res.data, error: res.error?.message };
     }
 
     if (gmailPass) {
