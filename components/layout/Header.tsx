@@ -56,7 +56,7 @@ export default function Header({ formsUrl, logoNavy = '/images/agarli-logo-navy.
         </Link>
 
         {/* Desktop Nav */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '2.5rem' }} className="hidden md:flex">
+        <div className="header-desktop-nav">
           {links.map(l => (
             <Link
               key={l.href}
@@ -79,39 +79,115 @@ export default function Header({ formsUrl, logoNavy = '/images/agarli-logo-navy.
           </a>
         </div>
 
-        {/* Mobile hamburger */}
+        {/* Mobile Hamburger Button */}
         <button
           type="button"
-          aria-label="Toggle menu"
-          className="md:hidden"
+          aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
+          className="header-mobile-toggle"
           onClick={() => setMenuOpen(v => !v)}
           style={{
-            background: 'none', border: 'none', cursor: 'pointer', padding: '0.25rem',
+            background: solid ? 'rgba(27,45,69,0.06)' : 'rgba(255,255,255,0.12)',
+            border: 'none',
+            borderRadius: '0.625rem',
+            cursor: 'pointer',
+            padding: '0.625rem',
             color: solid ? '#1B2D45' : '#fff',
+            transition: 'all 0.2s ease',
           }}
         >
-          {menuOpen ? <X style={{ width: '1.375rem', height: '1.375rem' }} /> : <Menu style={{ width: '1.375rem', height: '1.375rem' }} />}
+          {menuOpen ? (
+            <X style={{ width: '1.625rem', height: '1.625rem' }} />
+          ) : (
+            <Menu style={{ width: '1.625rem', height: '1.625rem' }} />
+          )}
         </button>
       </nav>
 
-      {/* Mobile menu */}
+      {/* Mobile Menu Dropdown */}
       {menuOpen && (
-        <div style={{
-          background: '#0B1A30',
-          borderTop: '1px solid rgba(255,255,255,0.08)',
-          padding: '1.5rem clamp(1.5rem,5vw,4rem)',
-          display: 'flex', flexDirection: 'column', gap: '1.25rem',
-        }}>
-          {links.map(l => (
-            <Link key={l.href} href={l.href} style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.95rem', fontWeight: 500 }}>
-              {l.label}
-            </Link>
-          ))}
-          <a href={formsUrl || '#consultation'} data-open-consultation="true" className="btn-base btn-gold" style={{ textAlign: 'center' }}>
+        <div
+          style={{
+            background: '#0B1A30',
+            borderTop: '1px solid rgba(255,255,255,0.08)',
+            padding: '1.75rem clamp(1.5rem, 5vw, 2.5rem) 2.25rem',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '1.25rem',
+            boxShadow: '0 25px 50px -12px rgba(0,0,0,0.5)',
+            animation: 'fadeIn 0.2s ease-out',
+          }}
+        >
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+            {links.map(l => {
+              const active = pathname === l.href;
+              return (
+                <Link
+                  key={l.href}
+                  href={l.href}
+                  onClick={() => setMenuOpen(false)}
+                  style={{
+                    color: active ? '#C9A96E' : 'rgba(255,255,255,0.88)',
+                    fontSize: '1.1rem',
+                    fontWeight: active ? 600 : 500,
+                    padding: '0.75rem 0',
+                    borderBottom: '1px solid rgba(255,255,255,0.06)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                  }}
+                >
+                  <span>{l.label}</span>
+                  {active && (
+                    <span style={{ fontSize: '0.7rem', color: '#C9A96E', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+                      Current
+                    </span>
+                  )}
+                </Link>
+              );
+            })}
+          </div>
+
+          <a
+            href={formsUrl || '#consultation'}
+            data-open-consultation="true"
+            onClick={() => setMenuOpen(false)}
+            className="btn-base btn-gold"
+            style={{
+              marginTop: '0.75rem',
+              width: '100%',
+              justifyContent: 'center',
+              padding: '0.875rem',
+              fontSize: '0.95rem',
+            }}
+          >
             Book a Consultation
           </a>
         </div>
       )}
+
+      {/* Embedded CSS for reliable responsive switching */}
+      <style>{`
+        @media (min-width: 861px) {
+          .header-desktop-nav {
+            display: flex !important;
+            align-items: center;
+            gap: 2.25rem;
+          }
+          .header-mobile-toggle {
+            display: none !important;
+          }
+        }
+        @media (max-width: 860px) {
+          .header-desktop-nav {
+            display: none !important;
+          }
+          .header-mobile-toggle {
+            display: flex !important;
+            align-items: center;
+            justify-content: center;
+          }
+        }
+      `}</style>
     </header>
   );
 }
