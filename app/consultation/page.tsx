@@ -468,7 +468,7 @@ export default function ConsultationPage() {
         phone="+20 102 013 0946"
         phoneHref="tel:+201020130946"
         email="info@agarli.com"
-        whatsapp="https://wa.me/201020130946"
+        whatsapp="https://wa.me/201019000181"
         location="Cairo · Egypt"
         formsUrl="#consultation"
       />

@@ -39,9 +39,9 @@ export async function generateMetadata(): Promise<Metadata> {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const c = getContent();
   const gaId = c.site.googleAnalyticsId;
-  const whatsappUrl = c.floatingWhatsapp?.url || c.contact?.whatsapp || 'https://wa.me/201020130946';
+  const whatsappUrl = c.floatingWhatsapp?.url || c.contact?.whatsapp || 'https://wa.me/201019000181';
   const whatsappLabel = c.floatingWhatsapp?.label || 'Chat with Agarli';
-  const whatsappNumber = c.floatingWhatsapp?.phone || c.contact?.phone || '+201020130946';
+  const whatsappNumber = c.floatingWhatsapp?.phone || '+201019000181';
 
   return (
     <html lang="en" suppressHydrationWarning>
