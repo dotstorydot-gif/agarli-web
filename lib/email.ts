@@ -1,4 +1,5 @@
 import { Resend } from 'resend';
+import nodemailer from 'nodemailer';
 
 type LeadNotificationData = {
   name: string;
@@ -9,9 +10,6 @@ type LeadNotificationData = {
   notes?: string;
   createdAt?: string;
 };
-
-const resendApiKey = process.env.RESEND_API_KEY;
-const resend = resendApiKey ? new Resend(resendApiKey) : null;
 
 export async function sendLeadNotificationEmail(lead: LeadNotificationData) {
   const recipient = process.env.NOTIFICATION_EMAIL || 'Joe.mounir0@gmail.com';
@@ -24,11 +22,17 @@ export async function sendLeadNotificationEmail(lead: LeadNotificationData) {
     ? new Date(lead.createdAt).toLocaleString('en-EG', { timeZone: 'Africa/Cairo', dateStyle: 'full', timeStyle: 'short' })
     : new Date().toLocaleString('en-EG', { timeZone: 'Africa/Cairo', dateStyle: 'full', timeStyle: 'short' });
 
-  if (!resend) {
+  const resendApiKey = process.env.RESEND_API_KEY;
+  const gmailPass = process.env.GMAIL_APP_PASSWORD;
+  const gmailUser = process.env.GMAIL_USER || 'Joe.mounir0@gmail.com';
+
+  // Check if any provider is configured
+  if (!resendApiKey && !gmailPass) {
     console.warn(
-      `[Email Warning] RESEND_API_KEY is not set in environment variables. Lead received for ${lead.name}, but email was not sent to ${recipient}. Add RESEND_API_KEY to your Vercel Environment Variables to enable live email delivery.`
+      `[Email Alert] Lead from ${lead.name} (${lead.phone}) was saved in database, but NO email provider is configured in environment variables. ` +
+      `To send live emails to ${recipient}, please set either RESEND_API_KEY (from resend.com) or GMAIL_APP_PASSWORD in Vercel Environment Variables.`
     );
-    return { ok: false, error: 'RESEND_API_KEY not configured' };
+    return { ok: false, error: 'NO_PROVIDER_CONFIGURED' };
   }
 
   const htmlContent = `
@@ -119,14 +123,41 @@ export async function sendLeadNotificationEmail(lead: LeadNotificationData) {
   `;
 
   try {
-    const data = await resend.emails.send({
-      from: 'Agarli Website <onboarding@resend.dev>',
-      to: [recipient],
-      replyTo: lead.email,
-      subject: `[New Lead] ${lead.name} - ${lead.propertyLocation} (${lead.propertyType})`,
-      html: htmlContent,
-    });
-    return { ok: true, data };
+    if (resendApiKey) {
+      const resend = new Resend(resendApiKey);
+      const data = await resend.emails.send({
+        from: 'Agarli Leads <onboarding@resend.dev>',
+        to: [recipient],
+        replyTo: lead.email,
+        subject: `[New Lead] ${lead.name} - ${lead.propertyLocation} (${lead.propertyType})`,
+        html: htmlContent,
+      });
+      console.log('[Email Dispatched via Resend]:', data);
+      return { ok: true, data };
+    }
+
+    if (gmailPass) {
+      const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: gmailUser,
+          pass: gmailPass,
+        },
+      });
+
+      const info = await transporter.sendMail({
+        from: `"Agarli Website" <${gmailUser}>`,
+        to: recipient,
+        replyTo: lead.email,
+        subject: `[New Lead] ${lead.name} - ${lead.propertyLocation} (${lead.propertyType})`,
+        html: htmlContent,
+      });
+
+      console.log('[Email Dispatched via Gmail]:', info.messageId);
+      return { ok: true, data: info };
+    }
+
+    return { ok: false, error: 'NO_PROVIDER_CONFIGURED' };
   } catch (error: any) {
     console.error('[Email Dispatch Error]:', error);
     return { ok: false, error: error?.message || 'Unknown error sending email' };
