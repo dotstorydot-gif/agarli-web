@@ -266,7 +266,7 @@ export default function IncomeCalculator({ config }: Props) {
           {/* Bottom Summary Section: JUST THE TOTAL PAYOUT */}
           <div
             style={{
-              padding: 'clamp(2rem, 4vw, 3rem)',
+              padding: 'clamp(1.25rem, 3.5vw, 3rem)',
               background: 'linear-gradient(180deg, #FFFFFF 0%, #FAF8F5 100%)',
             }}
           >
@@ -276,7 +276,7 @@ export default function IncomeCalculator({ config }: Props) {
                 background: '#0B1A30',
                 color: '#ffffff',
                 borderRadius: '1.75rem',
-                padding: 'clamp(2.25rem, 5vw, 3.25rem)',
+                padding: 'clamp(1.75rem, 4.5vw, 3.25rem) clamp(1.25rem, 4vw, 2.5rem)',
                 boxShadow: '0 24px 50px -15px rgba(11, 26, 48, 0.3)',
                 position: 'relative',
                 overflow: 'hidden',
@@ -298,13 +298,13 @@ export default function IncomeCalculator({ config }: Props) {
                 }}
               />
 
-              <div className="eyebrow" style={{ color: '#C9A96E', fontSize: '0.8125rem', letterSpacing: '0.18em' }}>
+              <div className="eyebrow" style={{ color: '#C9A96E', fontSize: 'clamp(0.7rem, 2vw, 0.8125rem)', letterSpacing: '0.18em' }}>
                 Total Net Payout To You ({years} {years === 1 ? 'Year' : 'Years'})
               </div>
 
               <div
                 style={{
-                  fontSize: 'clamp(2.5rem, 6vw, 4.5rem)',
+                  fontSize: 'clamp(2rem, 7.5vw, 4.5rem)',
                   fontWeight: 700,
                   color: '#ffffff',
                   marginTop: '0.75rem',
@@ -315,7 +315,9 @@ export default function IncomeCalculator({ config }: Props) {
                 {formatCurrency(totalNetOwner)}
               </div>
 
+              {/* Desktop Breakdown (Inline row with dots) */}
               <div
+                className="calculator-metrics-desktop"
                 style={{
                   marginTop: '1.25rem',
                   display: 'flex',
@@ -340,19 +342,117 @@ export default function IncomeCalculator({ config }: Props) {
                 </span>
               </div>
 
+              {/* Mobile Breakdown (Clean organized stacked pills, no loose dots) */}
+              <div
+                className="calculator-metrics-mobile"
+                style={{
+                  display: 'none',
+                  flexDirection: 'column',
+                  gap: '0.5rem',
+                  marginTop: '1.25rem',
+                  textAlign: 'left',
+                }}
+              >
+                <div
+                  style={{
+                    background: 'rgba(255,255,255,0.06)',
+                    border: '1px solid rgba(255,255,255,0.1)',
+                    borderRadius: '0.75rem',
+                    padding: '0.625rem 0.875rem',
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    fontSize: '0.825rem',
+                    color: 'rgba(255,255,255,0.75)',
+                  }}
+                >
+                  <span>Average Net Payout:</span>
+                  <strong style={{ color: '#C9A96E', fontSize: '0.875rem' }}>
+                    {formatCurrency(totalNetOwner / (years * 12))} / mo
+                  </strong>
+                </div>
+
+                <div
+                  style={{
+                    background: 'rgba(255,255,255,0.06)',
+                    border: '1px solid rgba(255,255,255,0.1)',
+                    borderRadius: '0.75rem',
+                    padding: '0.625rem 0.875rem',
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    fontSize: '0.825rem',
+                    color: 'rgba(255,255,255,0.75)',
+                  }}
+                >
+                  <span>Initial Rent:</span>
+                  <strong style={{ color: '#ffffff', fontSize: '0.875rem' }}>
+                    {formatCurrency(monthlyRent)} / mo
+                  </strong>
+                </div>
+
+                <div
+                  style={{
+                    background: 'rgba(201,169,110,0.1)',
+                    border: '1px solid rgba(201,169,110,0.25)',
+                    borderRadius: '0.75rem',
+                    padding: '0.625rem 0.875rem',
+                    fontSize: '0.775rem',
+                    color: '#C9A96E',
+                    textAlign: 'center',
+                    lineHeight: 1.4,
+                  }}
+                >
+                  Agarli Advantage: <strong>15% Y1 · 5% Y2+ · +10% rent appreciation/yr</strong>
+                </div>
+              </div>
+
               {/* Consultation CTA Button */}
-              <div style={{ marginTop: '2.25rem' }}>
+              <div style={{ marginTop: '1.75rem' }}>
                 <a
                   href="#consultation"
                   data-open-consultation="true"
-                  className="btn-base btn-gold"
-                  style={{ padding: '0.95rem 2.25rem', fontSize: '0.95rem' }}
+                  className="btn-base btn-gold calculator-cta-btn"
+                  style={{
+                    padding: '0.95rem 2rem',
+                    fontSize: '0.95rem',
+                    display: 'inline-flex',
+                  }}
                 >
                   <span>Book a Consultation For This Property</span>
-                  <ArrowRight style={{ width: '1.1rem', height: '1.1rem' }} />
+                  <ArrowRight style={{ width: '1.1rem', height: '1.1rem', flexShrink: 0 }} />
                 </a>
               </div>
             </div>
+
+            {/* Responsive styles */}
+            <style>{`
+              @media (max-width: 640px) {
+                .calculator-metrics-desktop {
+                  display: none !important;
+                }
+                .calculator-metrics-mobile {
+                  display: flex !important;
+                }
+                .calculator-cta-btn {
+                  width: 100% !important;
+                  display: flex !important;
+                  justify-content: center !important;
+                  text-align: center !important;
+                  white-space: normal !important;
+                  padding: 0.875rem 1rem !important;
+                  font-size: 0.9rem !important;
+                }
+              }
+              @media (min-width: 641px) {
+                .calculator-metrics-desktop {
+                  display: flex !important;
+                }
+                .calculator-metrics-mobile {
+                  display: none !important;
+                }
+              }
+            `}</style>
           </div>
         </div>
       </div>
