@@ -1,0 +1,276 @@
+{
+  "site": {
+    "title": "Agarli — Stop Being a Landlord. Start Being an Investor.",
+    "description": "Agarli is Egypt's premium residential asset management partner: reliable income, full legal compliance, transparent reporting and complete peace of mind.",
+    "ogTitle": "Agarli — Residential Asset Management",
+    "ogDescription": "Reliable income, professional management, asset protection. Your property, managed as an investment.",
+    "googleAnalyticsId": "",
+    "googleCalendarId": "",
+    "googleFormsUrl": "https://forms.gle/",
+    "adminPassword": "agarli2026",
+    "logoNavy": "/images/agarli-logo-navy.png",
+    "logoWhite": "/images/agarli-logo-white.png"
+  },
+  "contact": {
+    "phone": "+20 100 000 0000",
+    "phoneHref": "tel:+201000000000",
+    "email": "hello@agarli.com",
+    "whatsapp": "https://wa.me/201019000181",
+    "location": "Cairo · Egypt"
+  },
+  "floatingWhatsapp": {
+    "enabled": true,
+    "phone": "+201019000181",
+    "url": "https://wa.me/201019000181",
+    "label": "Chat with Agarli"
+  },
+  "footer": {
+    "tagline": "Residential asset management for owners who expect their property to perform like an investment—and be cared for like a home.",
+    "copyright": "2026",
+    "license": "Licensed residential asset management · Egypt"
+  },
+  "home": {
+    "hero": {
+      "eyebrow": "Residential Asset Management · Egypt",
+      "headline": "Stop Being a Landlord.",
+      "headlineAccent": "Start Being an Investor.",
+      "body": "Agarli manages your home as a professional investment—reliable monthly income, expert care, legal protection and complete transparency. You keep the asset. We carry the work.",
+      "ctaLabel": "Book a Consultation",
+      "learnMoreLabel": "Learn More",
+      "heroImage": "/images/hero-villa.jpg",
+      "heroImageAlt": "Contemporary luxury villa at golden hour with reflecting pool"
+    },
+    "howItWorks": {
+      "eyebrow": "How it works",
+      "headline": "Three steps between ownership and income.",
+      "steps": [
+        {
+          "number": "01",
+          "title": "Tell Us About Your Property",
+          "body": "A short conversation about your home, its location, condition and what you want it to achieve. No obligation, no pressure."
+        },
+        {
+          "number": "02",
+          "title": "We Build Your Management Strategy",
+          "body": "Our team prepares a tailored plan: positioning, income projection, legal structure, maintenance standards and reporting cadence."
+        },
+        {
+          "number": "03",
+          "title": "Enjoy Passive Income",
+          "body": "We take over completely. You receive reliable income, quarterly asset reviews and full transparency—without a single tenant call."
+        }
+      ]
+    },
+    "ctaBanner": {
+      "headline": "Your Property Deserves More Than Management.",
+      "headlineAccent": "It Deserves a Partner.",
+      "ctaLabel": "Discover Why Agarli",
+      "bgImage": "/images/editorial-architecture.jpg",
+      "bgImageAlt": "Modern residential facade with timber louvers in afternoon light"
+    }
+  },
+  "whyAgarli": {
+    "page": {
+      "eyebrow": "Why Agarli",
+      "headline": "Ownership, without the weight of ownership.",
+      "body": "Six commitments that turn a property into a performing asset—and ask nothing of your time."
+    },
+    "features": [
+      {
+        "icon": "coins",
+        "title": "Guaranteed Income",
+        "body": "A clear income structure, paid on schedule. No chasing tenants, no uncertain months."
+      },
+      {
+        "icon": "sparkles",
+        "title": "Professional Management",
+        "body": "Vetted occupants, scheduled maintenance and one accountable manager for your asset."
+      },
+      {
+        "icon": "shield-check",
+        "title": "Asset Protection",
+        "body": "Quarterly condition reviews and preventive care, so value compounds instead of eroding."
+      },
+      {
+        "icon": "scale",
+        "title": "Legal Security",
+        "body": "Compliant contracts, verified identities and proper documentation on every agreement."
+      },
+      {
+        "icon": "file-text",
+        "title": "Transparent Reporting",
+        "body": "Itemised statements in plain language. Every cost and booking visible, nothing buried."
+      },
+      {
+        "icon": "handshake",
+        "title": "Long-Term Partnership",
+        "body": "We measure success in years of stewardship. Your manager stays with your property."
+      }
+    ],
+    "comparison": {
+      "headline": "Why our model is different.",
+      "rows": [
+        {
+          "label": "Income",
+          "agarli": "Structured, scheduled payouts",
+          "traditional": "Depends on the month"
+        },
+        {
+          "label": "Reporting",
+          "agarli": "Itemised statements",
+          "traditional": "On request, if at all"
+        },
+        {
+          "label": "Maintenance",
+          "agarli": "Preventive and documented",
+          "traditional": "Reactive and ad hoc"
+        },
+        {
+          "label": "Legal",
+          "agarli": "Compliant contracts",
+          "traditional": "Informal agreements"
+        },
+        {
+          "label": "Accountability",
+          "agarli": "Named asset manager",
+          "traditional": "Rotating intermediaries"
+        },
+        {
+          "label": "Owner effort",
+          "agarli": "None required",
+          "traditional": "Constant involvement"
+        }
+      ]
+    },
+    "cta": {
+      "headline": "Your Property Should Work For You.",
+      "ctaLabel": "Book a Consultation"
+    }
+  },
+  "pricing": {
+    "page": {
+      "eyebrow": "Pricing",
+      "headline": "One fee. Nothing behind it.",
+      "body": "We earn only when your asset earns. A single management fee covers the entire operation—everything else is passed through at cost, with the paperwork attached."
+    },
+    "feeCard": {
+      "eyebrow": "Management fee",
+      "percentage": "15",
+      "description": "of the income your property generates. Charged monthly, deducted from your statement, never invoiced separately.",
+      "footnote": "No onboarding fee. No listing fee. No renewal fee.",
+      "ctaLabel": "Book a Consultation"
+    },
+    "included": {
+      "eyebrow": "What's included",
+      "items": [
+        "Dedicated asset manager",
+        "Occupant sourcing and vetting",
+        "Contract drafting and legal compliance",
+        "Rent collection and scheduled payouts",
+        "Preventive and reactive maintenance coordination",
+        "Quarterly property condition review",
+        "Itemised monthly reporting",
+        "24/7 occupant support line"
+      ],
+      "footnote": "Third-party costs such as repairs or utilities are passed through at cost, with the invoice attached to your statement."
+    },
+    "calculator": {
+      "eyebrow": "Yield Calculator",
+      "headline": "Calculate Your Rental Income Over Time",
+      "body": "See how your passive income compounds with scheduled 10% annual rent appreciation and Agarli's reduced 5% management rate from Year 2 onwards.",
+      "minRent": 2000,
+      "maxRent": 250000,
+      "defaultRent": 35000,
+      "year1Fee": 15,
+      "year2Fee": 5,
+      "annualIncrease": 10
+    },
+    "faq": {
+      "eyebrow": "Questions",
+      "headline": "Answered plainly.",
+      "items": [
+        {
+          "question": "How is the management fee calculated?",
+          "answer": "It is a single percentage of the income your property generates. If the property earns nothing in a given month, the fee is nothing—our incentives stay aligned with yours."
+        },
+        {
+          "question": "Are there hidden costs?",
+          "answer": "No. Third-party costs such as repairs or utilities are passed through at cost with the invoice attached to your monthly statement. We add no margin on them."
+        },
+        {
+          "question": "Is there a minimum contract term?",
+          "answer": "Our standard agreement runs twelve months so that a strategy has room to work, with a straightforward exit if expectations are not met."
+        },
+        {
+          "question": "Can I still use my property?",
+          "answer": "Yes. Owner stays are scheduled in advance and coordinated by your manager, with the property prepared to the same standard we give occupants."
+        }
+      ]
+    },
+    "cta": {
+      "headline": "Find out what your property could earn.",
+      "ctaLabel": "Book a Consultation",
+      "bgImage": "/images/interior-stair.jpg",
+      "bgImageAlt": "Minimal marble staircase in a contemporary home"
+    }
+  },
+  "founders": {
+    "page": {
+      "eyebrow": "Leadership & Stewardship",
+      "headline": "Experienced Leadership Behind Agarli.",
+      "body": "Over four decades of combined executive leadership in operations, corporate finance, and governance—delivering institutional standards to residential asset management."
+    },
+    "items": [
+      {
+        "name": "Khaled Lotfi",
+        "role": "Co-Founder & Operations Leader",
+        "email": "kahled.lotfi@agarli.com",
+        "bio": "A results-driven and operations leader with 20 years of experience across fields. He brings strong capabilities in P&L ownership, operational excellence, and stakeholder management, with a proven ability to lead diverse teams and deliver complex projects in challenging environments. Known for his disciplined execution, customer-centric mindset, and high accountability, Khaled consistently drives sustainable performance and long-term value.",
+        "image": "/images/founders/khaled-lotfi.jpg",
+        "highlights": [
+          "20 Years Operations Leadership",
+          "P&L Ownership & Execution",
+          "Stakeholder & Team Leadership",
+          "Customer-Centric Execution"
+        ]
+      },
+      {
+        "name": "Joe Mounir",
+        "role": "Co-Founder & Finance Leader",
+        "email": "Joe.mounir@agarli.com",
+        "bio": "Finance and operations leader with over 20 years of experience across regional and multinational roles. He has held senior leadership positions spanning finance, compliance, known for driving performance, leading cross-functional teams to deliver measurable results, With a strong foundation in finance and certifications in IFRS and Lean Six Sigma, he combines strategic insight with hands-on leadership, high ownership, and a people-first mindset.",
+        "image": "/images/founders/joe-mounir.jpg",
+        "highlights": [
+          "20+ Years Regional & Multinational Roles",
+          "IFRS & Lean Six Sigma Certified",
+          "Finance & Compliance Leadership",
+          "Strategic & People-First Mindset"
+        ]
+      }
+    ],
+    "philosophy": {
+      "eyebrow": "Our Standard",
+      "headline": "Why Leadership Matters in Asset Management",
+      "cards": [
+        {
+          "title": "Owner-First Stewardship",
+          "body": "We manage every residence with the same discipline, accountability, and fiduciary care we would demand for our personal equity."
+        },
+        {
+          "title": "Institutional Governance",
+          "body": "Combining certified financial rigor (IFRS) and continuous operational optimization (Lean Six Sigma) to protect asset value."
+        },
+        {
+          "title": "Uncompromising Accountability",
+          "body": "No anonymous call centers or passing the buck. Our founders set the standard and remain personally reachable to our clients."
+        }
+      ]
+    },
+    "cta": {
+      "headline": "Partner With Leadership You Can Trust.",
+      "ctaLabel": "Book a Consultation",
+      "bgImage": "/images/editorial-architecture.jpg",
+      "bgImageAlt": "Modern residential facade with timber louvers in afternoon light"
+    }
+  }
+}

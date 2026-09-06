@@ -1,0 +1,24 @@
+[
+  {
+    "id": "lead_1788692028918_1skrx",
+    "createdAt": "2026-09-06T10:53:48.918Z",
+    "status": "new",
+    "name": "Karim Zaki",
+    "phone": "+201234567890",
+    "email": "karim.zaki@example.com",
+    "propertyLocation": "Sheikh Zayed",
+    "propertyType": "Standalone Villa",
+    "notes": "Interested in full asset management service."
+  },
+  {
+    "id": "lead_demo_01",
+    "createdAt": "2026-09-06T10:15:00.000Z",
+    "status": "new",
+    "name": "Ahmed Mansour",
+    "phone": "+201001234567",
+    "email": "ahmed.mansour@example.com",
+    "propertyLocation": "New Cairo (Tagamoa)",
+    "propertyType": "Standalone Villa",
+    "notes": "Looking for professional management for a 4-bedroom luxury villa in Palm Hills. Ready to lease next month."
+  }
+]
