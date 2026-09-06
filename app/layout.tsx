@@ -14,13 +14,25 @@ export async function generateMetadata(): Promise<Metadata> {
     title: c.site.title,
     description: c.site.description,
     openGraph: {
-      title: c.site.ogTitle,
-      description: c.site.ogDescription,
+      title: c.site.ogTitle || c.site.title,
+      description: c.site.ogDescription || c.site.description,
       type: 'website',
+      images: ['/images/agarli-logo-navy.png'],
     },
-    twitter: { card: 'summary_large_image', title: c.site.ogTitle, description: c.site.ogDescription },
+    twitter: {
+      card: 'summary_large_image',
+      title: c.site.ogTitle || c.site.title,
+      description: c.site.ogDescription || c.site.description,
+      images: ['/images/agarli-logo-navy.png'],
+    },
     authors: [{ name: 'Agarli' }],
-    icons: { icon: '/favicon.png' },
+    icons: {
+      icon: [
+        { url: '/favicon.ico' },
+        { url: '/favicon.png', type: 'image/png' },
+      ],
+      apple: [{ url: '/apple-touch-icon.png' }],
+    },
   };
 }
 
