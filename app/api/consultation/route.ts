@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getLeads, addLead, updateLeadStatus, deleteLead } from '@/lib/leads';
+import { sendLeadNotificationEmail } from '@/lib/email';
 import { cookies } from 'next/headers';
 
 // Public POST endpoint to submit consultation requests
@@ -23,6 +24,17 @@ export async function POST(req: NextRequest) {
       propertyType: propertyType ? String(propertyType).trim() : 'Residential',
       notes: notes ? String(notes).trim() : '',
     });
+
+    // Dispatch email notification to Joe.mounir0@gmail.com
+    await sendLeadNotificationEmail({
+      name: lead.name,
+      phone: lead.phone,
+      email: lead.email,
+      propertyLocation: lead.propertyLocation,
+      propertyType: lead.propertyType,
+      notes: lead.notes,
+      createdAt: lead.createdAt,
+    }).catch(err => console.error('[Email Notification Error]:', err));
 
     return NextResponse.json({
       ok: true,
